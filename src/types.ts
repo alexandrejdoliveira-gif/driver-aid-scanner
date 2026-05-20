@@ -23,3 +23,37 @@ export interface FirebaseSession {
   consolidated: { trackingId: string; table: string; scannedAt: string }[]
   totalPackages: number
 }
+
+// ── Amazon Flex extraction types ──
+
+export interface DeliveryStop {
+  id: string
+  stopNumber: number
+  stopCode: string
+  address: string
+  city: string
+  deliveryInfo: string
+  extractedAt: Date
+  sessionId: string
+}
+
+export interface FirebaseFlexRoute {
+  sessionId: string
+  createdAt: unknown
+  stops: {
+    stopNumber: number
+    stopCode: string
+    address: string
+    city: string
+    deliveryInfo: string
+    extractedAt: string
+  }[]
+  totalStops: number
+}
+
+export interface ExtractionLog {
+  id: string
+  msg: string
+  type: 'info' | 'success' | 'warn' | 'error'
+  ts: Date
+}

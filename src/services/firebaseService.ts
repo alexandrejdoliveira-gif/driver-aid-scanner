@@ -12,7 +12,7 @@ export async function sendSessionToFirebase(
     ...caixas.map((c) => ({ trackingId: c.trackingId, table: 'Caixas', scannedAt: c.scannedAt.toISOString() })),
   ]
 
-  const payload: Omit<FirebaseSession, 'sessionId'> & { createdAt: unknown; sessionId: string } = {
+  const payload: Omit<FirebaseSession, 'sessionId' | 'createdAt'> & { createdAt: unknown; sessionId: string } = {
     sessionId,
     createdAt: serverTimestamp(),
     envelopes: envelopes.map((e) => ({ trackingId: e.trackingId, scannedAt: e.scannedAt.toISOString() })),
