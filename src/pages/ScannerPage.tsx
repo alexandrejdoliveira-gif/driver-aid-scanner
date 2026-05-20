@@ -10,7 +10,11 @@ type AppView = 'scanner' | 'tables' | 'summary'
 
 let itemIdCounter = 0
 
-export const ScannerPage: React.FC = () => {
+interface ScannerPageProps {
+  onGoFlex?: () => void
+}
+
+export const ScannerPage: React.FC<ScannerPageProps> = ({ onGoFlex }) => {
   const [activeTable, setActiveTable] = useState<ActiveTable>('envelopes')
   const [envelopes, setEnvelopes] = useState<ScannedItem[]>([])
   const [caixas, setCaixas] = useState<ScannedItem[]>([])
@@ -124,6 +128,11 @@ export const ScannerPage: React.FC = () => {
         </div>
         <div className="header-stats">
           <span className="stat-chip">{totalPackages} total</span>
+          {onGoFlex && (
+            <button className="mode-switch-btn" onClick={onGoFlex} id="btn-go-flex">
+              🚗 Flex
+            </button>
+          )}
         </div>
       </header>
 

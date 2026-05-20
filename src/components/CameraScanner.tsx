@@ -32,13 +32,14 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({ isActive, onScanRe
 
   const startCamera = async () => {
     try {
+      const videoConstraints: MediaTrackConstraints = {
+        facingMode: { ideal: 'environment' },
+        width: { ideal: 1280 },
+        height: { ideal: 720 },
+        ...(({ focusMode: 'continuous' }) as Record<string, unknown>),
+      }
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: { ideal: 'environment' },
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-          focusMode: 'continuous' as never,
-        },
+        video: videoConstraints,
         audio: false,
       })
       streamRef.current = stream
